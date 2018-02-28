@@ -49,7 +49,7 @@ _handleClick(e){
 		this.props.setDuckRandom( duckMargin, row );
 		this.props.changeNet( position, row );
 
-
+//git remote add origin https://github.com/douganddeb3/React-App.git
 
         
 		if( row == 0 && this.props.duckBoxGo == true ){	
