@@ -23,16 +23,11 @@ _handleClick(e){
 
 	
 		let preMoveDuckPos =  this.props.netPos + this.props.duckLocation;
-		/* decide where to put net from where it is plus which box was clicked */
 		let position = this.props.netPos + boxNum;
 	
-		//this.props.changeNet(position, this.props.row);
-
-
 		let duckMargin = 0;
 		/* decide where to put net and duck if net goes over 1200 */
-		if( position > 1200){
-		console.log("position%1200 = " + position%1200);	
+		if( position > 1200){	
 		 position = position  % 1200;
 		 duckMargin = preMoveDuckPos - position; 
 		}else{
@@ -49,7 +44,7 @@ _handleClick(e){
 		this.props.setDuckRandom( duckMargin, row );
 		this.props.changeNet( position, row );
 
-//git remote add origin https://github.com/douganddeb3/React-App.git
+
 
         
 		if( row == 0 && this.props.duckBoxGo == true ){	
@@ -99,7 +94,7 @@ _handleClick(e){
 				let tempTrans = "scale(1.8)";
 				document.getElementById("thirdDuck").style.transform = tempTrans;
 				document.getElementById("third").style.marginLeft = 0;
-				document.getElementById("thirdDuck").style.marginLeft= "1100px";
+				document.getElementById("thirdDuck").style.marginLeft= "1000px";
 				
 				this.props.changeNet(0, 2 );
 				this.props.setDuckRandom( 1000, 2 );
@@ -124,10 +119,10 @@ _handleClick(e){
 
 
 	render(){
-		var left = this.props.duckLocation + "px";
+		/*var left = this.props.duckLocation + "px";
 		var imgStyle = {
 			marginLeft: left
-		}
+		}was in class imgPreStart style={imgStyle}*/
 		var leftNetMarg = this.props.netPos;
 		var netStyle = {
 			marginLeft: leftNetMarg
@@ -147,7 +142,7 @@ _handleClick(e){
 			</div> 
 			<div id="start">
 			<span id={ this.props.spacerId } style={ netStyle}><img id="net" className="netClass" src="assets/images/netPic.jpg" />
-			</span><img id={  this.props.duckPicProp } className="imgPreStart" src="assets/images/duckBuck.jpg" alt="duckBuck" style={imgStyle} /> 
+			</span><img id={  this.props.duckPicProp } className="imgPreStart" src="assets/images/duckBuck.jpg" alt="duckBuck"  /> 
 			</div>
 			</div>
 		);	

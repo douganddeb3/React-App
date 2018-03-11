@@ -7,10 +7,11 @@ class GameBox extends React.Component{
   constructor(){
     super();
     this.state = {
-      timer: 30,
+      timer: 30.01,
       duckRandom: [ 0, 0, 0 ],
       ducksBoxGo: [ true, true, true ],
-      netPosition: [ 0, 0, 0 ]    
+      netPosition: [ 0, 0, 0 ],
+      duckTempMove: [ 0, 0, 0]
       };
   }
 
@@ -37,45 +38,163 @@ class GameBox extends React.Component{
   }
 
 
+
+  _setDuckRandom(amount, row){
+    let ducks = this.state.duckRandom;
+    let _row = parseInt(row);
+    ducks[_row] = amount;
+    this.setState( () => ({ duckRandom: ducks}));
+  }
+
+
+
   timerCountDown(){
-    this.setState({
+    this.setState(() => ({
       timer: (this.state.timer - .01).toFixed(2)
-    });
+    }));
+    let rulecss = this.getRule();
+    let x = document.getElementById("secondDuck").style.marginLeft ;
+   let x1 = parseInt(x);  
+   console.log("timer "+ this.state.timer + "  marginleft " + x);  
+   console.log("duckTempMove = " + this.state.duckTempMove);
+   console.log("duckRandom = " + this.state.duckRandom); 
+      var duckFly = [];
+  
+ 
+
+    if( this.state.timer % 5 == 0){
+    console.log("timer %5 = " + this.state.timer); 
+     duckFly =  this.getDuckPositions();
+     this.setState( () => ({ duckTempMove: duckFly }));
+     
+    } 
+
+
+
+  if((this.state.timer - 1) % 5  == 0 ){
+  //Math.floor((Math.random() * 20) ) * 50 ;
+
+  rulecss.deleteRule("0%");
+  rulecss.deleteRule("50%");
+  rulecss.deleteRule("100%");
+  
+
+  rulecss.appendRule("0% { transform: translateX(0px);  }");
+  let x = document.getElementById("firstDuck").style.marginLeft ;
+  let x1 = parseInt(x);
+  let amountToTranslate = this.state.duckTempMove[0] - x1;
+  
+  rulecss.appendRule(" 50% { transform: translateX(" + amountToTranslate/2 + "px); }");
+  rulecss.appendRule(" 100% { transform: translateX(" + amountToTranslate + "px);} ");
+  document.getElementById("firstDuck").className = "duckMove";
+  this._setDuckRandom( () => ( this.state.duckTempMove[0], 0));
+  let tempFor = this.state.duckTempMove;
+  this.setState( () => ({ duckRandom: tempFor }));
+  
+
+  }else if( ( this.state.timer - 2) % 5 == 0 ){
+
+  //Math.floor((Math.random() * 20) ) * 50 ;   
+  
+  rulecss.deleteRule("0%");
+  rulecss.deleteRule("50%");
+  rulecss.deleteRule("100%");
+
+  rulecss.appendRule("0% { transform: translateX(0px);  }");
+  let x2 = document.getElementById("secondDuck").style.marginLeft ;
+  let x4 = parseInt(x);
+  let amountToTranslate2 = this.state.duckTempMove[1] - x4;
+  rulecss.appendRule(" 50% { transform: translateX(" + amountToTranslate2/2 +"px); }");
+  rulecss.appendRule(" 100% { transform: translateX(" + amountToTranslate2 + "px);} ");
+  document.getElementById("secondDuck").className = "duckMove";
+  this._setDuckRandom( this.state.duckTempMove[1], 1);
+  let tempFor2 = this.state.duckRandom;
+  this.setState( () => ({ duckRandom: tempFor2 }));
+  
+
+  }else if( (this.state.timer - 3) % 5 == 0 ){
+ 
+  
+  rulecss.deleteRule("0%");
+  rulecss.deleteRule("50%");
+  rulecss.deleteRule("100%");
+
+  rulecss.appendRule("0% { transform: translateX(0px);  }");
+  let x5 = document.getElementById("thirdDuck").style.marginLeft ;
+  let x6 = parseInt(x5);
+  let amountToTranslate3 = this.state.duckTempMove[2] - x6;
+  rulecss.appendRule(" 50% { transform: translateX(" + amountToTranslate3/2 +"px); }");
+  rulecss.appendRule(" 100% { transform: translateX(" + amountToTranslate3 + "px);} "); 
+  document.getElementById("thirdDuck").className = "duckMove";
+  this._setDuckRandom( this.state.duckTempMove[2], 2);
+  let tempFor3 = this.state.duckRandom;
+  this.setState( () => ({ duckRandom: tempFor3 }));
+
+    }else if( this.state.timer % 5 == 0){
+  
+  
     document.getElementById("firstDuck").className = "imgBegin";
     document.getElementById("secondDuck").className = "imgBegin";
     document.getElementById("thirdDuck").className = "imgBegin";
+
+    let tempMargStyle = this.state.duckRandom[0] + "px";
+    console.log("tempMarstyle = " + tempMargStyle);
+    document.getElementById("firstDuck").style.marginLeft = tempMargStyle ;
+    let tempMargStyle2 = this.state.duckRandom[1] + "px";
+    document.getElementById("secondDuck").style.marginLeft = tempMargStyle2 ;
+    let tempMargStyle3 = this.state.duckRandom[2] + "px";
+    document.getElementById("thirdDuck").style.marginLeft = tempMargStyle3 ;
+
+
+    let duckClassNames = document.getElementById("firstDuck").className; 
+    let duckImgMargin = document.getElementById("firstDuck").style.marginLeft;
     
+    }
+
+    if( ( this.state.timer - 1 ) % 5  == 0){
+      document.getElementById("secondDuck").className = "imgBegin";
+      let tempMargStyle2 = this.state.duckRandom[1] + "px";
+    document.getElementById("secondDuck").style.marginLeft = tempMargStyle2 ;
+
+    }
+
+    if( ( this.state.timer - 2 ) % 5  == 0){
+      document.getElementById("thirdDuck").className = "imgBegin";
+      let tempMargStyle3 = this.state.duckRandom[2] + "px";
+    document.getElementById("thirdDuck").style.marginLeft = tempMargStyle3 ;
+
+    }
+
+
     
     if(this.state.timer < 0){
       clearInterval(this.intervalId);
       document.getElementById('timerId').innerHTML = "Try Again";
-      this.setState({ timer: 30});
+      this.setState({ timer: 30.01});
       this.setState({ netPosition: [ 0, 0, 0]});
       let netClassesTimer = document.getElementsByClassName('net');
       while( netClassesTimer.length > 0){
         netClassesTimer[0].className = 'netClass';
       }
+    let newDucPosAfterTimer = this.getDuckPositions();
+    this.setState(() => ({ duckRandom: newDucPosAfterTimer }));  
     document.getElementById("firstDuck").className = "imgPreStart";
     document.getElementById("secondDuck").className = "imgPreStart";
     document.getElementById("thirdDuck").className = "imgPreStart";
     }
       
-    //}
-    if(this.state.timer % 5 == 0){
     
-      this.getDuckPositions();
-     // document.getElementById("firstDuck").className = "duckMove";
-    }
+  /*if( this.state.timer % 5 == 0){
+         
+    // this.setState({ duckRandom: duckFly });
+     this._setDuckRandom( duckFly[0], 0);
+    }*/
 
     this.tick();
-    this.getRule();
+    
 
   }
 
-
-  // var cssRule;
-
-  // Returns a reference to the specified CSS rule(s).
 
   getRule() {
       var cssRule;
@@ -97,34 +216,18 @@ class GameBox extends React.Component{
                       == CSSRule.KEYFRAMES_RULE) {
 
                   cssRule = rule;
-                console.log("cssRule = " + cssRule.name);
                 // CSSKeyframesRule.name
               }
 
           }
 
-      }
+      }return cssRule;
 
   }
 
-
-  /*
-  cssRule.deleteRule("0");
-
-  cssRule.deleteRule("1");
-
-  cssRule.appendRule("0% { transform: translateY(-150px) "
-
-      + scale +"; opacity: 0; }");
-
-  cssRule.appendRule("100% { transform: translateY(0px) "
-
-      + scale + "; opacity: 1; }");
-  */
-  
-
   clickStop(){
     console.log("CLICK");
+    console.log("END duckRandsom + " + this.state.duckRandom);
     let stopId = this.intervalId;
     clearInterval(stopId);
     this.setState({ timer: 30});
@@ -133,7 +236,7 @@ class GameBox extends React.Component{
     netClassesStop[0].className = 'netClass';
     netClassesStop[0].className = 'netClass';
     netClassesStop[0].className = 'netClass';
-    document.getElementById("firstDuck").className = "duckMove" ; // "imgPreStart";
+    document.getElementById("firstDuck").className = "imgPreStart" ; // "imgPreStart";
     document.getElementById("secondDuck").className = "imgPreStart";
     document.getElementById("thirdDuck").className = "imgPreStart";
     let tempNet2 = [ 0, 0, 0 ];
@@ -145,7 +248,8 @@ class GameBox extends React.Component{
 
 
   getDuckPositions(reset){
-    let duckFlock = this.state.duckRandom;
+
+    let duckFlock = [0,0,0];
     for(let i = 0; i < 3; i++){
       if (this.state.duckRandom[i] == 0 || this.state.ducksBoxGo[i] == true || reset == true){
       duckFlock[i] = Math.floor((Math.random() * 23) + 1) * 50 ;
@@ -159,28 +263,24 @@ class GameBox extends React.Component{
       
     }
    }
-    this.setState({ duckRandom: duckFlock });
+   return duckFlock;
+  
+  // this.setState({ duckRandom: duckFlock });
 
   }
 
-  _setDuckRandom(amount, row){
-    let ducks = this.state.duckRandom;
-    let _row = parseInt(row);
-    ducks[_row] = amount;
-    this.setState({ duckRandom: ducks});
-  }
+  
 
   
 
  _handleSubmit(e){
     e.preventDefault();
-   /* document.getElementById('firstDuck').style = "width:100px, height:100px";
-    document.getElementById('secondDuck').style = "width:100px, height:100px";
-    document.getElementById('thirdDuck').style = "width:100px, height:100px";
-    */
+
     this.setState({duckRandom: [ 0, 0, 0 ],
     ducksBoxGo: [ true, true, true ]  });
-    this.getDuckPositions(true);
+    let newDuckPos = this.getDuckPositions(true);
+    this.setState({ duckRandom: newDuckPos });
+
     document.getElementById('first').style.marginLeft = 0;
     document.getElementById('second').style.marginLeft = 0;
     document.getElementById('third').style.marginLeft = 0;
@@ -195,8 +295,8 @@ class GameBox extends React.Component{
     document.getElementById('secondDuck').style ='imgBegin';
     document.getElementById('thirdDuck').style = 'imgBegin'; 
     document.getElementById('net').style.marginLeft = 0; 
-    //let tempDuckLoc = this.state.duckRandom[0] + 'px';
-    //5document.getElementById("firstDuck").style.marginLeft = tempDuckLoc;
+    
+
     this.intervalId = setInterval(this.timerCountDown.bind(this), 10);
     
   }
@@ -236,7 +336,7 @@ class GameBox extends React.Component{
 
 
 
-  componentWillMount(){
+  /*componentWillMount(){
     let duckFlock =[];
     for(let i = 0; i < 3; i++){
       if (this.state.duckRandom[i] == 0 || this.state.ducksBoxGo[i] ){
@@ -244,7 +344,7 @@ class GameBox extends React.Component{
       }
     }
     this.setState({ duckRandom: duckFlock });
-  }
+  }*/
 
 
   }

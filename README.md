@@ -25,3 +25,4 @@ Our resulting code ends up in the `public` directory.
 _A Code School subscription is required before watching the videos. Don't have one yet? [Sign up today!](https://www.codeschool.com/pricing)_
 
 "# React-App" 
+"# React-App" 

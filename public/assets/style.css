@@ -1,9 +1,9 @@
 body, html {
   /*background: linear-gradient( #005566, #00FFFF);*/
   background-image: url("../assets/images/justSky.jpg");
-  background-size: 1250px 1000px;
+  background-size: 1275px 1050px;
   
-  width: 1250px;
+  width: 1275px;
   overflow: hidden;
 }
 * {
@@ -53,12 +53,6 @@ span{
     0% { width: 50px; }
     50% { width: 55px; }
     100% { width: 50px;}
-    /*0% { margin-left: 0px; }
-    25% { margin-left: -25px; }
-    50% { margin-left: 0px; }
-    75% { margin-left: 25px; }
-    100% { margin-left: 0px }
-    */
 }
 
 @keyframes netKeyFrame {
@@ -87,12 +81,13 @@ span{
 
 /*#firstDuck, #secondDuck, #thirdDuck, #fourthDuck, #fifthDuck, #sixthDuck */ 
 .imgBegin{ 
-	//width: 50px;
-	//height: 50px;
+	width: 50px;
+	height: 50px;
 	overflow: hidden;
 	border-radius: 50%;
+	margin-left: 0px;
 	animation-name: example;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
 
 }
@@ -109,18 +104,19 @@ span{
 
 @keyframes duckMoveKeyFrame{
 	0% { transform: translateX(0px); }
-	50% { transform: translateX( 200px); }
+	50% { transform: translateX( 50px); }
 	100% { transform: translateX( 0px);}
 }
 
 .duckMove{
-	//width: 50px;
-	//height: 50px;
+	width: 50px;
+	height: 50px;
 	overflow: hidden;
 	border-radius: 50%;
-	animation-name: duckMoveKeyFrame;
-	animation-duration: 1s;
-	animation-iteration-count: 1;
+	animation-name: duckMoveKeyFrame, example;
+	animation-duration: 1s, 1s;
+	animation-iteration-count: 1, infinite;
+	animation-timing-function: linear;
 }
 
 
