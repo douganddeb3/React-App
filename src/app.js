@@ -267,7 +267,7 @@ class GameBox extends React.Component{
   }
 
   
-
+/*  */
   
 
  _handleSubmit(e){
