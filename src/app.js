@@ -7,7 +7,7 @@ class GameBox extends React.Component{
   constructor(){
     super();
     this.state = {
-      timer: 30.01,
+      timer: 30.00,
       duckRandom: [ 0, 0, 0 ],
       ducksBoxGo: [ true, true, true ],
       netPosition: [ 0, 0, 0 ],
@@ -49,9 +49,9 @@ class GameBox extends React.Component{
 
 
   timerCountDown(){
-    this.setState(() => ({
+  /*  this.setState(() => ({
       timer: (this.state.timer - .01).toFixed(2)
-    }));
+    })); */
     let rulecss = this.getRule();
     let x = document.getElementById("secondDuck").style.marginLeft ;
    let x1 = parseInt(x);  
@@ -184,12 +184,9 @@ class GameBox extends React.Component{
     }
       
     
-  /*if( this.state.timer % 5 == 0){
-         
-    // this.setState({ duckRandom: duckFly });
-     this._setDuckRandom( duckFly[0], 0);
-    }*/
-
+    this.setState(() => ({
+      timer: (this.state.timer - .01).toFixed(2)
+    }));
     this.tick();
     
 
@@ -230,7 +227,7 @@ class GameBox extends React.Component{
     console.log("END duckRandsom + " + this.state.duckRandom);
     let stopId = this.intervalId;
     clearInterval(stopId);
-    this.setState({ timer: 30});
+    this.setState({ timer: 30.00});
   
     let netClassesStop = document.getElementsByClassName('net');
     netClassesStop[0].className = 'netClass';
