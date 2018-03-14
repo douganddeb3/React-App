@@ -2,7 +2,6 @@ body, html {
   /*background: linear-gradient( #005566, #00FFFF);*/
   background-image: url("../assets/images/justSky.jpg");
   background-size: 1275px 1050px;
-  
   width: 1275px;
   overflow: hidden;
 }
