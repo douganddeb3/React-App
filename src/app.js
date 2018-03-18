@@ -342,7 +342,7 @@ class GameBox extends React.Component{
     document.getElementById('net').style.marginLeft = 0; 
     
 
-    this.intervalId = setInterval(this.timerCountDown.bind(this), 10);
+    this.intervalId = setInterval(this.timerCountDown.bind(this), 5);
     
   }
 
